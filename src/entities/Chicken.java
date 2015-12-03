@@ -1,7 +1,9 @@
+package entities;
+
 /**
  * Created by user on 26/11/15.
  */
-public class Duck extends Entity {
+public class Chicken extends Entity {
     private static final int MAX_AGE = 20;
 
     @Override

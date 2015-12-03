@@ -1,8 +1,10 @@
+package entities;
+
 /**
  * Created by user on 26/11/15.
  */
-public class Pig extends Entity {
-    private static final int MAX_AGE = 30;
+public class Duck extends Entity {
+    private static final int MAX_AGE = 20;
 
     @Override
     public int getMaxAge() {

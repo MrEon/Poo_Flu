@@ -1,3 +1,5 @@
+package entities;
+
 /**
  * Created by user on 26/11/15.
  */
@@ -20,7 +22,7 @@ public abstract class Entity {
     }
 
     public int getContagionRate() {
-        return (int) ((int) 1 / contagionRate);
+        return (int) (1 / contagionRate);
     }
 
     public void age() {

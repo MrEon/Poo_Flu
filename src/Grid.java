@@ -1,3 +1,5 @@
+import entities.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -7,7 +9,7 @@ import java.util.Random;
  */
 public class Grid {
     public static final int nbrOfSick = 64;//Number of sick people at the start of the simulation
-    private List<Entity> list = new ArrayList<Entity>(1024);//1024 = 32*32
+    private List<Entity> list = new ArrayList<>(1024);//1024 = 32*32
     private int step = 32;
     private Random rnd = new Random();
 
@@ -16,7 +18,7 @@ public class Grid {
     }
 
     public Grid(int size) {
-        list = new ArrayList<Entity>(size * size);
+        list = new ArrayList<>(size * size);
         step = size;
         for (int i = 0; i < step * step; i++) {//On rempli la liste
             switch (rnd.nextInt(4)) {
@@ -87,7 +89,6 @@ public class Grid {
                     && checkForSpecies(step, coord)) {
 
                 list.get(coord).getSick();
-                return;
             }
         }
 
@@ -99,17 +100,12 @@ public class Grid {
 
     public void print() {
         for (int i = 0; i < list.size() - 1; i++) {
-            System.out.println(list.get(i).getClass() + "\n\t" + " State: " + list.get(i).state);
+            System.out.println(list.get(i).getClass() + "\n\t" + " entities.State: " + list.get(i).getState());
         }
     }
 
     public boolean isItOver() {
-        if (checkFor(State.Dead) || checkFor(State.Healthy))
-            return true;
-        else
-            return false;
-
-
+        return checkFor(State.Dead) || checkFor(State.Healthy);
     }
 
     private boolean checkFor(State state) {
