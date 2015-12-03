@@ -6,7 +6,7 @@ import java.util.HashMap;
  * This class collects and provides some statistical data on the state of a
  * field. It is flexible: it will create and maintain a counter for any class of
  * object that is found within the field.
- * 
+ *
  * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
  */
@@ -28,7 +28,7 @@ public class FieldStats {
 
     /**
      * Get details of what is in the field.
-     * 
+     *
      * @return A string describing what is in the field.
      */
     public String getPopulationDetails(Field field) {
@@ -48,7 +48,7 @@ public class FieldStats {
 
     /**
      * Get the number of individuals in the population of a given class.
-     * 
+     *
      * @return An int with the number for this class.
      */
     public int getPopulationCount(Field field, Class key) {
@@ -73,9 +73,8 @@ public class FieldStats {
 
     /**
      * Increment the count for one class of animal.
-     * 
-     * @param animalClass
-     *            The class of animal to increment.
+     *
+     * @param animalClass The class of animal to increment.
      */
     public void incrementCount(Class animalClass) {
         Counter count = counters.get(animalClass);
@@ -98,7 +97,7 @@ public class FieldStats {
     /**
      * Determine whether the simulation is still viable. I.e., should it
      * continue to run.
-     * 
+     *
      * @return true If there is more than one species alive.
      */
     public boolean isViable(Field field) {
@@ -120,9 +119,8 @@ public class FieldStats {
      * Generate counts of the number of foxes and rabbits. These are not kept up
      * to date as foxes and rabbits are placed in the field, but only when a
      * request is made for the information.
-     * 
-     * @param field
-     *            The field to generate the stats for.
+     *
+     * @param field The field to generate the stats for.
      */
     private void generateCounts(Field field) {
         reset();

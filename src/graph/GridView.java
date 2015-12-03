@@ -1,7 +1,7 @@
 package graph;
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +9,7 @@ import java.util.Map;
  * A graphical view of the simulation grid. The view displays a colored
  * rectangle for each location representing its contents. Colors for each type
  * of species can be defined using the setColor method.
- * 
+ *
  * @author Michael Kölling and David J. Barnes
  * @version 2011.07.31
  */
@@ -32,11 +32,9 @@ public class GridView extends JFrame implements SimulatorView {
 
     /**
      * Create a view of the given width and height.
-     * 
-     * @param height
-     *            The simulation's height.
-     * @param width
-     *            The simulation's width.
+     *
+     * @param height The simulation's height.
+     * @param width  The simulation's width.
      */
     public GridView(int height, int width) {
         stats = new FieldStats();
@@ -60,11 +58,9 @@ public class GridView extends JFrame implements SimulatorView {
 
     /**
      * Define a color to be used for a given class of animal.
-     * 
-     * @param animalClass
-     *            The animal's Class object.
-     * @param color
-     *            The color to be used for the given class.
+     *
+     * @param animalClass The animal's Class object.
+     * @param color       The color to be used for the given class.
      */
     public void setColor(Class animalClass, Color color) {
         colors.put(animalClass, color);
@@ -85,11 +81,9 @@ public class GridView extends JFrame implements SimulatorView {
 
     /**
      * Show the current status of the field.
-     * 
-     * @param step
-     *            Which iteration step it is.
-     * @param field
-     *            The field whose status is to be displayed.
+     *
+     * @param step  Which iteration step it is.
+     * @param field The field whose status is to be displayed.
      */
     public void showStatus(int step, Field field) {
         if (!isVisible()) {
@@ -121,7 +115,7 @@ public class GridView extends JFrame implements SimulatorView {
 
     /**
      * Determine whether the simulation should continue to run.
-     * 
+     *
      * @return true If there is more than one species alive.
      */
     public boolean isViable(Field field) {
@@ -142,10 +136,9 @@ public class GridView extends JFrame implements SimulatorView {
      */
     private class FieldView extends JPanel {
         private final int GRID_VIEW_SCALING_FACTOR = 6;
-
+        Dimension size;
         private int gridWidth, gridHeight;
         private int xScale, yScale;
-        Dimension size;
         private Graphics g;
         private Image fieldImage;
 

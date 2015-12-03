@@ -1,15 +1,15 @@
 package graph;
 
-import java.util.Random;
-import java.util.List;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.awt.Color;
+import java.util.List;
+import java.util.Random;
 
 /**
  * A simple predator-prey simulator, based on a rectangular field containing
  * rabbits and foxes.
- * 
+ *
  * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
  */
@@ -42,11 +42,9 @@ public class Simulator {
 
     /**
      * Create a simulation field with the given size.
-     * 
-     * @param depth
-     *            Depth of the field. Must be greater than zero.
-     * @param width
-     *            Width of the field. Must be greater than zero.
+     *
+     * @param depth Depth of the field. Must be greater than zero.
+     * @param width Width of the field. Must be greater than zero.
      */
     public Simulator(int depth, int width) {
         if (width <= 0 || depth <= 0) {
@@ -86,9 +84,8 @@ public class Simulator {
     /**
      * Run the simulation from its current state for the given number of steps.
      * Stop before the given number of steps if it ceases to be viable.
-     * 
-     * @param numSteps
-     *            The number of steps to run for.
+     *
+     * @param numSteps The number of steps to run for.
      */
     public void simulate(int numSteps) {
         for (int step = 1; step <= numSteps && views.get(0).isViable(field); step++) {
@@ -106,7 +103,7 @@ public class Simulator {
         // Provide space for newborn animals.
         List<Animal> newAnimals = new ArrayList<>();
         // Let all rabbits act.
-        for (Iterator<Animal> it = animals.iterator(); it.hasNext();) {
+        for (Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
             Animal animal = it.next();
             animal.act(newAnimals);
             if (!animal.isAlive()) {
