@@ -1,7 +1,3 @@
-package graph;
-
-import java.util.List;
-
 /**
  * A class representing shared characteristics of animals.
  *
