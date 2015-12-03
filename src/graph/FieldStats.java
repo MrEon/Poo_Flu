@@ -1,3 +1,5 @@
+package graph;
+
 import java.util.HashMap;
 
 /**
@@ -15,7 +17,7 @@ public class FieldStats {
     private boolean countsValid;
 
     /**
-     * Construct a FieldStats object.
+     * Construct a graph.FieldStats object.
      */
     public FieldStats() {
         // Set up a collection for counters for each type of animal that

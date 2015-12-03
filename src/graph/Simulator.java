@@ -1,8 +1,11 @@
+package graph;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import creatures.*;
 
 /**
  * A simple predator-prey simulator, based on a rectangular field containing

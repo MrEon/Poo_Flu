@@ -1,3 +1,5 @@
+package creatures;
+import graph.*;
 import java.util.List;
 
 /**
@@ -36,7 +38,7 @@ public abstract class Being {
      *
      * @return true if the animal is still alive.
      */
-    protected boolean isAlive() {
+    public boolean isAlive() {
         return alive;
     }
 

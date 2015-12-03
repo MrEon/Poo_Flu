@@ -1,3 +1,5 @@
+package creatures;
+
 /**
  * Created by user on 26/11/15.
  */

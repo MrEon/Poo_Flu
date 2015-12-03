@@ -1,5 +1,8 @@
+package creatures;
+
 import java.util.List;
 import java.util.Random;
+import graph.*;
 
 /**
  * A simple model of a rabbit.

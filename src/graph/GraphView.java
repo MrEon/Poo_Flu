@@ -1,10 +1,12 @@
+package graph;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
 
 /**
- * The GraphView provides a view of two populations of actors in the field as a
+ * The graph.GraphView provides a view of two populations of actors in the field as a
  * line graph over time. In its current version, it can only plot exactly two
  * different classes of animals. If further animals are introduced, they will
  * not currently be displayed.

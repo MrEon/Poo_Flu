@@ -1,3 +1,5 @@
+package graph;
+
 /**
  * Provide a counter for a participant in the simulation.
  * This includes an identifying string and a count of how
@@ -16,7 +18,7 @@ public class Counter {
     /**
      * Provide a name for one of the simulation types.
      *
-     * @param name A name, e.g. "Fox".
+     * @param name A name, e.g. "creatures.Fox".
      */
     public Counter(String name) {
         this.name = name;

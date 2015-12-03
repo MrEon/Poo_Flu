@@ -1,6 +1,9 @@
+package creatures;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import graph.*;
 
 /**
  * A simple model of a fox.

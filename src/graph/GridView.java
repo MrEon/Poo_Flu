@@ -1,3 +1,5 @@
+package graph;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
@@ -38,7 +40,7 @@ public class GridView extends JFrame implements SimulatorView {
         stats = new FieldStats();
         colors = new HashMap<>();
 
-        setTitle("Fox and Rabbit Simulation");
+        setTitle("creatures.Fox and creatures.Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
 

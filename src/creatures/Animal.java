@@ -1,3 +1,5 @@
+package creatures;
+import graph.*;
 /**
  * A class representing shared characteristics of animals.
  *
