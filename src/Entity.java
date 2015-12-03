@@ -33,6 +33,10 @@ public class Entity {
     }
 
     protected void changeState() {
+        if(getMaxAge()< age){
+            state = State.Dead;
+            return;
+        }
         changeToContagious();
 
         dieFromSickness();
