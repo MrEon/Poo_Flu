@@ -75,3 +75,63 @@ Unconstraints
     Use the development tool of your choice.
     Use the operating system of your choice.
     Use the hardware of your choice.
+
+    ---------------------------------------------------------------------------------------------------------------
+
+    Flu epidemic redux
+
+    Times are tough - your company, due to budget reductions, no longer has the resources to fund parallel projects so
+    you're being "asked" (a polite way of saying either that or you're fired) to consolidate your work with that of others.
+    Furthermore, the marketing department has decided that your current application is missing an essential component
+     to become a viable product - it has no visual display.
+    To do
+
+    You are now going to be working in three-person development groups (there may exceptionally be a two-person group,
+     nobody works alone), as in the table below. No, you have no choice in the other group member,
+      they've been scientifically determined by Human Resources for maximum compatibility.
+
+    Each group will
+
+        consolidate your individual projects into one "better" project;
+        identify who is responsible for what code in the resultant application
+        (as @author tags in javadoc comments). Although some code can be jointly owned, each group member must be
+        individually responsible for a reasonable amount of code (eg, a distribution of 80% by one member, 20% by
+        another and 0% by the third is unacceptable).
+
+    Additional project specs
+
+        Add a visual display to your current application.
+            However, there is very little budget for this project and management has decided that you
+             must re-use a display from another (very lucrative) project - the display from the Foxes and Rabbits
+             project. You have no choice in this, otherwise you're fired.
+        The visual display consists of two dynamic parts:
+            A view of the application's world with cells representing different population categories
+            (types of individuals at different stages of health).
+            Graph plots showing the numbers of individuals in different population categories.
+        A module for selecting / changing application parameters. A GUI is probably the way to go.
+            Choose between 4- and 8-connected neighbourhoods.
+            Slow down or speed up the simulation.
+        Apply the usual coding conventions. Otherwise you're fired.
+        You are only allowed to use the keyword static in three places:
+        in constants, in import static declarations and in the entry-point main method. Otherwise you're fired.
+
+    Deliverables
+
+        All source code and necessary resources into a .jar file archive file.
+        A READMOI.txt file explaining how to run the application and listing any necessary resources,
+         eg, JUnit, and where to obtain them.
+        No .class bytecode files.
+        If you use a commonly-available library, eg, JUnit if you do unit testing, always a good idea,
+         this should not be part of your deliverables. But it should be mentioned in the READMOI.txt file.
+        A .pdf file briefly describing what you did.
+
+    Client constraints
+
+    In the words of Jean-Paul Sartre, "L'enfer, c'est le client." Here's couple of constraints imposed
+    by the client, which your project must respect:
+
+        use some explicit inheritance (not just implicit inheritance from Object);
+        use attribute polymorphism;
+        use method polymorphism with dynamic dispatch;
+        use enum.
+

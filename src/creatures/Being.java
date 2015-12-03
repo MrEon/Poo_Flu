@@ -1,5 +1,7 @@
 package creatures;
 import graph.*;
+import virus.Virus;
+
 import java.util.List;
 
 /**
@@ -12,6 +14,10 @@ public abstract class Being {
     private Field field;
     // The animal's position in the field.
     private Location location;
+
+
+    //The virus an animal carries
+    private Virus virus = null;
 
     /**
      * Create a new animal at location in field.
@@ -55,6 +61,7 @@ public abstract class Being {
         }
     }
 
+
     /**
      * Return the animal's location.
      *
@@ -84,5 +91,13 @@ public abstract class Being {
      */
     protected Field getField() {
         return field;
+    }
+
+    /**
+     * Return's the animal's virus
+     * @return the animal's virus, null if not infected
+     */
+    public Virus getVirus() {
+        return virus;
     }
 }
