@@ -1,7 +1,10 @@
 package creatures;
 
 /**
- * Created by user on 26/11/15.
+ * State
+ *
+ * @author Plague Inc.
+ * @version 2015
  */
 public enum State {
     Healthy,

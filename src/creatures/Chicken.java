@@ -4,14 +4,14 @@ import graph.Field;
 import graph.Location;
 
 /**
- * Animal
+ * Chicken
  *
  * @author Plague Inc.
  * @version 2015
  */
-public abstract class Animal extends Being {
+public class Chicken extends Animal {
 
-    public Animal(Field field, Location location) {
+    public Chicken(Field field, Location location) {
         super(field, location);
     }
 

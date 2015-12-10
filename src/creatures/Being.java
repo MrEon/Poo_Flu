@@ -1,11 +1,12 @@
 package creatures;
-import graph.*;
-import virus.Virus;
-
-import java.util.List;
+import graph.Field;
+import graph.Location;
 
 /**
- * Created by user on 03/12/15.
+ * Being
+ *
+ * @author Plague Inc.
+ * @version 2015
  */
 public abstract class Being {
     // Whether the animal is alive or not.
@@ -14,10 +15,6 @@ public abstract class Being {
     private Field field;
     // The animal's position in the field.
     private Location location;
-
-
-    //The virus an animal carries
-    private Virus virus = null;
 
     /**
      * Create a new animal at location in field.
@@ -30,14 +27,6 @@ public abstract class Being {
         this.field = field;
         setLocation(location);
     }
-
-    /**
-     * Make this animal act - that is: make it do
-     * whatever it wants/needs to do.
-     *
-     * @param newBeings A list to receive newly born animals.
-     */
-    abstract public void act(List<Being> newBeings);
 
     /**
      * Check whether the animal is alive or not.
@@ -60,7 +49,6 @@ public abstract class Being {
             field = null;
         }
     }
-
 
     /**
      * Return the animal's location.
@@ -91,13 +79,5 @@ public abstract class Being {
      */
     protected Field getField() {
         return field;
-    }
-
-    /**
-     * Return's the animal's virus
-     * @return the animal's virus, null if not infected
-     */
-    public Virus getVirus() {
-        return virus;
     }
 }

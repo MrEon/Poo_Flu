@@ -1,18 +1,17 @@
 package graph;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
 import creatures.*;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 /**
- * A simple predator-prey simulator, based on a rectangular field containing
- * rabbits and foxes.
+ * Simulator
  *
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Plague Inc.
+ * @version 2015
  */
 public class Simulator {
     // Constants representing configuration information for the simulation.
@@ -20,10 +19,14 @@ public class Simulator {
     private static final int DEFAULT_WIDTH = 120;
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 80;
-    // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.02;
-    // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;
+    // The probability that a human will be created in any given grid position.
+    private static final double HUMAN_CREATION_PROBABILITY = 0.02;
+    // The probability that a pig will be created in any given grid position.
+    private static final double PIG_CREATION_PROBABILITY = 0.08;
+    // The probability that a duck will be created in any given grid position.
+    private static final double DUCK_CREATION_PROBABILITY = 0.03;
+    // The probability that a chicken will be created in any given grid position.
+    private static final double CHICKEN_CREATION_PROBABILITY = 0.03;
 
     // List of beings in the field.
     private List<Being> beings;
@@ -61,13 +64,17 @@ public class Simulator {
         views = new ArrayList<>();
 
         SimulatorView view = new GridView(depth, width);
-        view.setColor(Rabbit.class, Color.ORANGE);
-        view.setColor(Fox.class, Color.BLUE);
+        view.setColor(Human.class, Color.BLUE);
+        view.setColor(Pig.class, Color.PINK);
+        view.setColor(Duck.class, Color.GREEN);
+        view.setColor(Chicken.class, Color.RED);
         views.add(view);
 
         view = new GraphView(500, 150, 500);
-        view.setColor(Rabbit.class, Color.BLACK);
-        view.setColor(Fox.class, Color.RED);
+        view.setColor(Human.class, Color.BLUE);
+        view.setColor(Pig.class, Color.PINK);
+        view.setColor(Duck.class, Color.GREEN);
+        view.setColor(Chicken.class, Color.RED);
         views.add(view);
 
         // Setup a valid starting point.
@@ -101,19 +108,7 @@ public class Simulator {
     public void simulateOneStep() {
         step++;
 
-        // Provide space for newborn beings.
-        List<Being> newAnimals = new ArrayList<>();
-        // Let all rabbits act.
-        for (Iterator<Being> it = beings.iterator(); it.hasNext(); ) {
-            Being animal = it.next();
-            animal.act(newAnimals);
-            if (!animal.isAlive()) {
-                it.remove();
-            }
-        }
-
-        // Add the newly born foxes and rabbits to the main lists.
-        beings.addAll(newAnimals);
+        // TODO : stuff
 
         updateViews();
     }
@@ -149,14 +144,22 @@ public class Simulator {
         field.clear();
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
-                if (rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
+                if (rand.nextDouble() <= HUMAN_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Fox fox = new Fox(true, field, location);
-                    beings.add(fox);
-                } else if (rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
+                    Human human = new Human(field, location);
+                    beings.add(human);
+                } else if (rand.nextDouble() <= PIG_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Rabbit rabbit = new Rabbit(true, field, location);
-                    beings.add(rabbit);
+                    Pig pig = new Pig(field, location);
+                    beings.add(pig);
+                } else if (rand.nextDouble() <= DUCK_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Duck duck = new Duck(field, location);
+                    beings.add(duck);
+                } else if (rand.nextDouble() <= CHICKEN_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Chicken chicken = new Chicken(field, location);
+                    beings.add(chicken);
                 }
                 // else leave the location empty.
             }
