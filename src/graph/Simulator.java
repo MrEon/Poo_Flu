@@ -113,6 +113,16 @@ public class Simulator {
         updateViews();
     }
 
+    public List<Being> getNeighbours(Being being){
+        List<Being> neighbours = new ArrayList<Being>();
+        Location location = being.getLocation();
+        for(Being b : beings ){
+            if(b.getLocation().next(location))
+                neighbours.add(b);
+        }
+        return neighbours;
+    }
+
     /**
      * Reset the simulation to a starting position.
      */

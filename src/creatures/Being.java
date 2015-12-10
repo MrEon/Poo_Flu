@@ -1,6 +1,11 @@
 package creatures;
 import graph.Field;
 import graph.Location;
+import virus.Virus;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Being
@@ -15,6 +20,11 @@ public abstract class Being {
     private Field field;
     // The animal's position in the field.
     private Location location;
+    //the virus infection that plagues the creatures
+    private Virus virus  = null;
+    //Advancement of the malady
+    private State state;
+    private int daysOfInfection = 0;
 
     /**
      * Create a new animal at location in field.
@@ -55,7 +65,7 @@ public abstract class Being {
      *
      * @return The animal's location.
      */
-    protected Location getLocation() {
+    public Location getLocation() {
         return location;
     }
 
@@ -72,12 +82,58 @@ public abstract class Being {
         field.place(this, newLocation);
     }
 
+    public Virus getVirus() {
+        return virus;
+    }
+
     /**
      * Return the animal's field.
      *
      * @return The animal's field.
      */
+
     protected Field getField() {
         return field;
+    }
+
+    public void infect(Being being){
+        if(!virus.equals(null))
+            return;
+        if(!being.getVirus().equals(null)){
+            Random rnd = new Random();
+            int infected  = rnd.nextInt(10);
+            if(being.getVirus().getContagionRate()>= infected){
+                this.virus =being.getVirus();
+                daysOfInfection = 0;
+            }
+        }
+
+    }
+
+    public void age(){
+        switch (state){
+            case Sick:
+                sick();
+                break;
+            case Contagious:
+                contagious();
+                break;
+        }
+        daysOfInfection++;
+    }
+    protected void sick(){
+        if( daysOfInfection>virus.getIncubation()){
+            state = State.Contagious;
+            daysOfInfection = 0;
+        }
+    }
+
+    protected void contagious(){
+        Random rnd = new Random();
+        int death = rnd.nextInt(daysOfInfection);
+        if(death>virus.getMortalityRate()){
+            state = State.Dead;
+            daysOfInfection =0;
+        }
     }
 }

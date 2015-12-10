@@ -15,4 +15,8 @@ public class Human extends Being {
         super(field, location);
     }
 
+    @Override
+    protected void contagious(){
+        //TODO
+    }
 }
