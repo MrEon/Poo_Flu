@@ -4,23 +4,25 @@ package virus;
  * Created by user on 03/12/15.
  */
 public enum Virus {
-    H5N1(1/2, 10, 1/5), H1N1(1/6, 4, 1/10);
+    H5N1(20, 10, 5), H1N1(16, 4, 10), NONE(1, 1, 1);
 
-    float contagionRate;//Risque de contagion
+    int contagionRate;//Risque de contagion  (1/contagionRate)
     int incubation;//Periode d'incubation (le passage de Sick à  Contagious)
-    float mortalityRate;//Probabibilité de mourrir une fois Conatgious
+    int mortalityRate;//Nombre de jours minimum à vivre avant d'avoir la malchance de mourir
 
 
-    Virus(float c, int i, float m) {
-
+    Virus(int c, int i, int m) {
+        contagionRate = c;
+        incubation = i;
+        mortalityRate = m;
     }
 
     public int getMortalityRate() {
-        return (int) (1/mortalityRate); //Utile pour random.nextint(...);
+        return mortalityRate; //Utile pour random.nextint(...);
     }
 
     public int getContagionRate() {
-        return 1/ (int) contagionRate; //Utile pour random.nextint(...);
+        return contagionRate; //Utile pour random.nextint(...);
     }
 
     public int getIncubation() {

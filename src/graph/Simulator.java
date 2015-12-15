@@ -1,6 +1,7 @@
 package graph;
 
 import creatures.*;
+import virus.Virus;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -20,13 +21,13 @@ public class Simulator {
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 80;
     // The probability that a human will be created in any given grid position.
-    private static final double HUMAN_CREATION_PROBABILITY = 0.02;
+    private static final double HUMAN_CREATION_PROBABILITY = 0.28;
     // The probability that a pig will be created in any given grid position.
     private static final double PIG_CREATION_PROBABILITY = 0.08;
     // The probability that a duck will be created in any given grid position.
-    private static final double DUCK_CREATION_PROBABILITY = 0.03;
+    private static final double DUCK_CREATION_PROBABILITY = 0.08;
     // The probability that a chicken will be created in any given grid position.
-    private static final double CHICKEN_CREATION_PROBABILITY = 0.03;
+    private static final double CHICKEN_CREATION_PROBABILITY = 0.08;
 
     // List of beings in the field.
     private List<Being> beings;
@@ -98,6 +99,10 @@ public class Simulator {
     public void simulate(int numSteps) {
         for (int step = 1; step <= numSteps && views.get(0).isViable(field); step++) {
             simulateOneStep();
+            if(isItOver()) {
+                System.out.println("Simulation Over!");
+                break;
+            }
         }
     }
 
@@ -107,9 +112,11 @@ public class Simulator {
      */
     public void simulateOneStep() {
         step++;
-
-        // TODO : stuff
-
+        for(Being b : beings){
+            for(Being n : getNeighbours(b))
+                b.infect(n);
+            b.age();
+        }
         updateViews();
     }
 
@@ -117,7 +124,7 @@ public class Simulator {
         List<Being> neighbours = new ArrayList<Being>();
         Location location = being.getLocation();
         for(Being b : beings ){
-            if(b.getLocation().next(location))
+            if( !(b.getLocation() == null) && b.getLocation().next(location))
                 neighbours.add(b);
         }
         return neighbours;
@@ -134,6 +141,7 @@ public class Simulator {
         }
 
         populate();
+        insertVirus();
         updateViews();
     }
 
@@ -174,5 +182,30 @@ public class Simulator {
                 // else leave the location empty.
             }
         }
+    }
+
+    /**
+     * Allows to insert various viruses at the beginning of the simulation
+     */
+    private void insertVirus(){
+        Random rnd = new Random();
+        int infected = rnd.nextInt(DEFAULT_WIDTH);//Nombre arbitraire d'animaux inféctés au départ
+        for(int i  = 0; i<infected; i++){
+            int randomBeing = rnd.nextInt(beings.size()-1);
+            if(beings.get(randomBeing) instanceof Duck || beings.get(randomBeing) instanceof Chicken)
+                beings.get(randomBeing).setVirus(Virus.H1N1);
+            if(beings.get(randomBeing) instanceof Pig)
+                beings.get(randomBeing).setVirus(Virus.H5N1);
+            if(beings.get(randomBeing) instanceof Human)//All humans shall be healthy
+                i--;
+        }
+    }
+
+    private boolean isItOver(){
+        for(Being b : beings){
+            if( !(b == null) && !(b.getState().equals(State.Healthy)))
+                return false;
+        }
+        return true;
     }
 }

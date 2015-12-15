@@ -3,6 +3,8 @@ package creatures;
 import graph.Field;
 import graph.Location;
 
+import java.util.Random;
+
 /**
  * Human
  *
@@ -15,8 +17,21 @@ public class Human extends Being {
         super(field, location);
     }
 
-    @Override
+   @Override
     protected void contagious(){
-        //TODO
+        Random rnd = new Random();
+        int death = rnd.nextInt(daysOfInfection);
+        if(death>virus.getMortalityRate()){
+            state = State.Dead;
+            daysOfInfection =0;
+            setDead();
+        }else{
+            death = rnd.nextInt(100);
+            System.out.println(death);
+            if(death<10){
+                state = State.Recovering;
+                daysOfInfection = 0;
+            }
+        }
     }
 }

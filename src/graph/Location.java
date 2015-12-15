@@ -69,6 +69,12 @@ public class Location {
     }
 
     public boolean next(Location location){
+        if(this == null)
+            return false;
+        if(location == null)
+            return false;
+
+
         if(col == location.getCol() &&  Math.abs(row-location.getRow()) == 1)
             return true;
         if(row == location.getRow() &&  Math.abs(col-location.getCol()) == 1)
