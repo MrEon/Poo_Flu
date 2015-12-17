@@ -1,10 +1,9 @@
 package creatures;
+
 import graph.Field;
 import graph.Location;
 import virus.Virus;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -14,17 +13,15 @@ import java.util.Random;
  * @version 2015
  */
 public abstract class Being {
-    // Whether the animal is alive or not.
-    protected boolean alive;
     // The animal's field.
     protected Field field;
     // The animal's position in the field.
     protected Location location;
     //the virus infection that plagues the creatures
-    protected Virus virus  = Virus.NONE;
+    protected Virus virus;
     //Advancement of the malady
-    protected State state = State.Healthy;
-    protected int daysOfInfection = 0;
+    protected State state;
+    protected int daysSinceInfected = 0;
 
     /**
      * Create a new animal at location in field.
@@ -33,7 +30,8 @@ public abstract class Being {
      * @param location The location within the field.
      */
     public Being(Field field, Location location) {
-        alive = true;
+        state = State.Healthy;
+        virus = Virus.NONE;
         this.field = field;
         setLocation(location);
     }
@@ -44,7 +42,7 @@ public abstract class Being {
      * @return true if the animal is still alive.
      */
     public boolean isAlive() {
-        return alive;
+        return state != State.Dead;
     }
 
     /**
@@ -52,7 +50,7 @@ public abstract class Being {
      * It is removed from the field.
      */
     protected void setDead() {
-        alive = false;
+        state = State.Dead;
         if (location != null) {
             field.clear(location);
             location = null;
@@ -96,62 +94,62 @@ public abstract class Being {
         return field;
     }
 
-    public void infect(Being neighbour){
-        if(!virus.equals(Virus.NONE))
-            return;
-        if(!neighbour.getVirus().equals(Virus.NONE) && this.virusMatch(neighbour)){
-            Random rnd = new Random();
-            int infected  = rnd.nextInt(20);
-            if(neighbour.getVirus().getContagionRate()>= infected){
-                this.virus =neighbour.getVirus();
-                state = State.Sick;
-                daysOfInfection = 0;
+    public void infect(Being neighbour) {
+        if (virus.equals(Virus.NONE)) {
+            if (!neighbour.getVirus().equals(Virus.NONE) && this.canByInfectedBy(neighbour)) {
+                Random rnd = new Random();
+                int infected = rnd.nextInt(20);
+                if (neighbour.getVirus().getContagionRate() >= infected) {
+                    this.virus = neighbour.getVirus();
+                    state = State.Sick;
+                    daysSinceInfected = 0;
+                }
             }
         }
-
     }
 
-    public void age(){
-        switch (state){
+    public void age() {
+        switch (state) {
             case Sick:
-                sick();
-                daysOfInfection++;
+                actSick();
+                daysSinceInfected++;
                 break;
             case Contagious:
-                contagious();
-                daysOfInfection++;
+                actContagious();
+                daysSinceInfected++;
                 break;
             case Recovering:
-                recovering();
-                daysOfInfection++;
+                actRecovering();
+                daysSinceInfected++;
                 break;
             default:
-                daysOfInfection++;
+                daysSinceInfected++;
                 break;
         }
 
     }
-    protected void sick(){
-        if( daysOfInfection>virus.getIncubation()){
+
+    protected void actSick() {
+        if (daysSinceInfected > virus.getIncubation()) {
             state = State.Contagious;
-            daysOfInfection = 0;
+            daysSinceInfected = 0;
         }
     }
 
-    protected void contagious(){
+    protected void actContagious() {
         Random rnd = new Random();
-        int death = rnd.nextInt(daysOfInfection);
-        if(death>virus.getMortalityRate()){
+        int death = rnd.nextInt(daysSinceInfected);
+        if (death > virus.getMortalityRate()) {
             state = State.Dead;
-            daysOfInfection =0;
+            daysSinceInfected = 0;
             setDead();
         }
     }
 
-    protected void recovering(){
-        if(daysOfInfection>=3){
+    protected void actRecovering() {
+        if (daysSinceInfected >= 3) {
             state = State.Healthy;
-            daysOfInfection = 0;
+            daysSinceInfected = 0;
         }
     }
 
@@ -161,23 +159,35 @@ public abstract class Being {
 
     /**
      * Beware of this class, to be reviewed first before submition
-     * @param b
+     *
+     * @param b : another being
      * @return true if two beings can infect each other
      */
-    private boolean virusMatch(Being b){
-        if(this.getClass().equals(b.getClass()))
+    private boolean canByInfectedBy(Being b) {
+        if (this.getClass().equals(b.getClass())) {
             return true;
-        if(this instanceof Duck && b instanceof Chicken)
+        } else if (this instanceof Duck && b instanceof Chicken) {
             return true;
-        if(this instanceof Chicken && b instanceof Duck)
+        } else if (this instanceof Chicken && b instanceof Duck) {
             return true;
-        if(this instanceof Human)
+        } else if (this instanceof Human) {
             return true;
-
+        }
         return false;
     }
 
     public State getState() {
         return state;
     }
+
+    public void move() {
+        Location oldLocation = getLocation();
+        if (field != null) {
+            Location newLocation = field.freeAdjacentLocation(oldLocation);
+            if (newLocation != null) {
+                setLocation(newLocation);
+            }
+        }
+    }
+
 }

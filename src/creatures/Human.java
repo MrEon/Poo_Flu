@@ -17,20 +17,20 @@ public class Human extends Being {
         super(field, location);
     }
 
-   @Override
-    protected void contagious(){
+    @Override
+    protected void actContagious() {
         Random rnd = new Random();
-        int death = rnd.nextInt(daysOfInfection);
-        if(death>virus.getMortalityRate()){
+        int death = rnd.nextInt(daysSinceInfected);
+        if (death > virus.getMortalityRate()) {
             state = State.Dead;
-            daysOfInfection =0;
+            daysSinceInfected = 0;
             setDead();
-        }else{
+        } else {
             death = rnd.nextInt(100);
-            System.out.println(death);
-            if(death<10){
+            System.out.println("Human death: " + death);
+            if (death < 10) {
                 state = State.Recovering;
-                daysOfInfection = 0;
+                daysSinceInfected = 0;
             }
         }
     }
