@@ -3,7 +3,7 @@ package creatures;
 /**
  * State
  *
- * @author Plague Inc.
+ * @author SI3 G3 - Groupe numero 3 : Boucher-Thouveny & Lafaurie & Monier
  * @version 2015
  */
 public enum State {

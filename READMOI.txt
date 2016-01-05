@@ -1,0 +1,9 @@
+SI3 G3 - Groupe numero 3 : Boucher-Thouveny & Lafaurie & Monier
+
+In order to run the program you need to :
+ - Extract the jar in a clean folder
+ - Add the folder as a source folder in your IDE
+ - Run the Main class
+ - Enjoy our simulator
+
+Thank you and have a good day :)

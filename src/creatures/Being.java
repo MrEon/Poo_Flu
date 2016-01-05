@@ -9,7 +9,7 @@ import java.util.Random;
 /**
  * Being
  *
- * @author Plague Inc.
+ * @author SI3 G3 - Groupe numero 3 : Boucher-Thouveny & Lafaurie & Monier
  * @version 2015
  */
 public abstract class Being {

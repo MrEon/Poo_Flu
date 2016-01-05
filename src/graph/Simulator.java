@@ -11,7 +11,7 @@ import java.util.Random;
 /**
  * Simulator
  *
- * @author Plague Inc.
+ * @author SI3 G3 - Groupe numero 3 : Boucher-Thouveny & Lafaurie & Monier
  * @version 2015
  */
 public class Simulator {
@@ -104,7 +104,9 @@ public class Simulator {
                 e.printStackTrace();
             }
             if (isItOver()) {
-                System.out.println("Simulation Over!");
+                System.out.println("Simulation is over");
+                System.out.println("Days passed: " + step);
+                System.out.println("Every virus has been eradicated !");
                 break;
             }
         }
@@ -218,9 +220,6 @@ public class Simulator {
         for (Being b : beings) {
             if (b.getState() != State.Healthy && b.getState() != State.Dead) {
                 end = false;
-                if (step > 500) {
-                    System.out.println(b.getState());
-                }
                 break;
             }
         }

@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * Human
  *
- * @author Plague Inc.
+ * @author SI3 G3 - Groupe numero 3 : Boucher-Thouveny & Lafaurie & Monier
  * @version 2015
  */
 public class Human extends Being {
@@ -27,7 +27,6 @@ public class Human extends Being {
             setDead();
         } else {
             death = rnd.nextInt(100);
-            System.out.println("Human death: " + death);
             if (death < 10) {
                 state = State.Recovering;
                 daysSinceInfected = 0;

@@ -1,14 +1,17 @@
 package virus;
 
 /**
- * Created by user on 03/12/15.
+ * Virus
+ *
+ * @author SI3 G3 - Groupe numero 3 : Boucher-Thouveny & Lafaurie & Monier
+ * @version 2015
  */
 public enum Virus {
     H5N1(20, 10, 5), H1N1(16, 4, 10), NONE(1, 1, 1);
 
-    int contagionRate;//Risque de contagion  (1/contagionRate)
-    int incubation;//Periode d'incubation (le passage de Sick à  Contagious)
-    int mortalityRate;//Nombre de jours minimum à vivre avant d'avoir la malchance de mourir
+    int contagionRate;
+    int incubation;
+    int mortalityRate;
 
 
     Virus(int c, int i, int m) {
@@ -18,11 +21,11 @@ public enum Virus {
     }
 
     public int getMortalityRate() {
-        return mortalityRate; //Utile pour random.nextint(...);
+        return mortalityRate;
     }
 
     public int getContagionRate() {
-        return contagionRate; //Utile pour random.nextint(...);
+        return contagionRate;
     }
 
     public int getIncubation() {
